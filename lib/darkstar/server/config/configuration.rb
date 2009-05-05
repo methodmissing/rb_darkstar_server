@@ -16,9 +16,9 @@ module Darkstar
         end        
         
         def configure!
-          [ boot, properties, logging ].each do |config|
+          [ boot, properties, logging ].map do |config|
             config.write
-          end  
+          end.first  
         end        
         
       end

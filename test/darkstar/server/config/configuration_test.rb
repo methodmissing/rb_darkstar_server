@@ -21,10 +21,10 @@ class ConfigurationTest < Test::Unit::TestCase
   end
   
   test "should be able to configure itself" do
-    @configuration.boot.expects(:write).once
     @configuration.properties.expects(:write).once
     @configuration.logging.expects(:write).once
-    @configuration.configure!
+    Darkstar::Server::Config::Boot.any_instance.stubs(:write).returns('path')
+    assert_equal 'path', @configuration.configure!
   end
   
 end
