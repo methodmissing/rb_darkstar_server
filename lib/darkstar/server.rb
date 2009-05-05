@@ -1,4 +1,6 @@
 require 'java'
+require 'forwardable'
+require 'fileutils'
 
 $:.unshift(File.dirname(__FILE__))
 
@@ -23,6 +25,8 @@ module Darkstar
       autoload :Base, 'server/config/base'      
       autoload :Boot, 'server/config/boot'
       autoload :Properties, 'server/config/properties'
+      autoload :Logging, 'server/config/logging'
+      autoload :Configuration, 'server/config/configuration'
       
     end
     

@@ -7,8 +7,14 @@ module Darkstar
   module Server
     module Test
       
+      APP = File.expand_path( File.join( File.dirname(__FILE__), 'app', 'hello_world' ) )
+      
       def self.setup!
         ::Test::Unit::TestCase.send(:extend, Declarative)
+      end
+      
+      def self.app!
+        require APP
       end
       
       # thx ActiveSupport

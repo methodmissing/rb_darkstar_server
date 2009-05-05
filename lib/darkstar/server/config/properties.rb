@@ -4,16 +4,20 @@ module Darkstar
       class Properties < Base
 
         def to_s
-          %[ com.sun.sgs.app.name=#{@application.name}
+          %[ com.sun.sgs.app.name=#{application_name}
              com.sun.sgs.app.root=#{root}
              com.sun.sgs.impl.transport.tcp.listen.port=1139
-             com.sun.sgs.app.listener=com.sun.sgs.tutorial.server.lesson1.HelloWorld ]
+             com.sun.sgs.app.listener=#{application_name} ]
         end
+   
+        def filename
+          "#{application_name}.properties"
+        end   
         
         private 
         
           def root
-            File.join( base_dir, 'data', @application.name )
+            File.join( base_dir, 'data', application_name )
           end
         
       end

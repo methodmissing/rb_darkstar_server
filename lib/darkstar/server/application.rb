@@ -1,14 +1,19 @@
 module Darkstar
   module Server
     class Application
+      class MissingName < StandardError
+      end
+      
+      class MissingPath < StandardError  
+      end    
 
       serialVersionUID = 1
 
       include AppListener,
               Serializable
 
-      def initialize( properties )
-        @properties = properties  
+      def initialize( properties = nil)
+        @properties = properties || const_get(:PROPERTIES)  
       end
 
       def logged_in( session )
@@ -22,13 +27,17 @@ module Darkstar
           @properties.send(method, *args, &block)
         end  
       end
-      
-      def boot
-        @boot_config ||= Config::Boot.new( self )
+            
+      def configuration
+        @configuration ||= Config::Configuration.new( self )
       end
       
-      def properties
-        @properties_config ||= Config::Properties.new( self )
+      def application_name
+        name || raise( MissingName )
+      end
+      
+      def application_path
+        path || raise( MissingPath )
       end
       
       private
