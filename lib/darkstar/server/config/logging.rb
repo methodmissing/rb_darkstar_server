@@ -16,8 +16,7 @@ module Darkstar
         
         def filename
           "logging.properties"
-        end
-        
+        end        
         
       end
     end

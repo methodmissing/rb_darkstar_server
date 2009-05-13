@@ -6,7 +6,10 @@ module Darkstar
         
         attr_reader :application
         
-        def_delegators :application, :application_name, :application_path
+        def_delegators :application, 
+                       :application_name, 
+                       :application_path,
+                       :application_tmp_path
         
         def initialize( application )
           @application = application
@@ -20,8 +23,8 @@ module Darkstar
           raise NotImplemented
         end
         
-        def write
-          ensure_directory do
+        def write( path = nil  )
+          ensure_directory( path ) do
             File.open( with_directory, "w+" ) do |file|
               file << to_s
             end    
@@ -31,17 +34,18 @@ module Darkstar
         
         private
         
-          def ensure_directory
+          def ensure_directory( path )
+            @directory = path if path
             FileUtils.makedirs directory
             yield
           end
           
           def with_directory
-            @with_directory ||= File.join( directory, filename )
+            File.join( directory, filename )
           end
           
           def directory
-            @directory ||= File.join( application_path, 'config' )
+            @directory || File.join( application_path, 'conf' )
           end
         
           def base_dir

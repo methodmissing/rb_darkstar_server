@@ -23,7 +23,8 @@ class ConfigBaseTest < Test::Unit::TestCase
   test "should be able to write to disk" do
     @config.stubs(:filename).returns('app.boot')
     @config.stubs(:to_s).returns('config')
-    assert_equal "/tmp/rb_darkstar_server_test/config/app.boot", @config.write
+    assert_equal "/tmp/rb_darkstar_server_test/conf/app.boot", @config.write
+    assert_equal "/tmp/other_path/app.boot", @config.write( '/tmp/other_path' )
   end
   
 end

@@ -30,6 +30,13 @@ module Darkstar
       
     end
     
+    module Deploy
+      
+      autoload :Packager, 'server/deploy/packager'
+      autoload :Runner, 'server/deploy/runner'
+      
+    end
+    
     extend Bridge unless const_defined?(:AppListener)
   end
 end

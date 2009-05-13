@@ -15,10 +15,10 @@ module Darkstar
           @logging ||= Config::Logging.new( self )
         end        
         
-        def configure!
+        def configure!( path = nil )
           [ boot, properties, logging ].map do |config|
-            config.write
-          end.first  
+            config.write( path )
+          end.compact.detect{|c| c.match(/boot/) }  
         end        
         
       end

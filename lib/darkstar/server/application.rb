@@ -13,7 +13,7 @@ module Darkstar
               Serializable
 
       def initialize( properties = nil)
-        @properties = properties || const_get(:PROPERTIES)  
+        @properties = properties || self.class.const_get(:PROPERTIES)  
       end
 
       def logged_in( session )
@@ -29,11 +29,27 @@ module Darkstar
       end
             
       def configuration
-        @configuration ||= Config::Configuration.new( self )
+        Config::Configuration.new( self )
+      end
+      
+      def packager
+        Darkstar::Server::Deploy::Packager.new( self )
+      end
+      
+      def runner
+        Darkstar::Server::Deploy::Runner.new( self )        
+      end
+      
+      def deploy!
+        packager.package!
       end
       
       def application_name
         name || raise( MissingName )
+      end
+      
+      def application_tmp_path
+        File.join( '', 'tmp', name )
       end
       
       def application_path

@@ -7,14 +7,17 @@ module Darkstar
   module Server
     module Test
       
-      APP = File.expand_path( File.join( File.dirname(__FILE__), 'app', 'hello_world' ) )
+      unless const_defined?(:APP)
+        APP = File.expand_path( File.join( File.dirname(__FILE__), 'app' ) )
+        APP_LISTENER = File.join( APP, 'lib', 'hello_world' )
+      end
       
       def self.setup!
         ::Test::Unit::TestCase.send(:extend, Declarative)
       end
       
       def self.app!
-        require APP
+        require APP_LISTENER
       end
       
       # thx ActiveSupport
