@@ -15,6 +15,8 @@ module Darkstar
       VENDOR = File.join( ROOT, 'vendor' )
     
       JARS = File.join( VENDOR, 'lib' )
+
+      DEPLOY = File.join( VENDOR, 'deploy' )
     end
     
     autoload :Bridge, 'server/bridge'

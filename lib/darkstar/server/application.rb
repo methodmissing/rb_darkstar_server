@@ -29,15 +29,15 @@ module Darkstar
       end
             
       def configuration
-        Config::Configuration.new( self )
+        @configuration ||= Config::Configuration.new( self )
       end
       
       def packager
-        Darkstar::Server::Deploy::Packager.new( self )
+        @packager ||= Darkstar::Server::Deploy::Packager.new( self )
       end
       
       def runner
-        Darkstar::Server::Deploy::Runner.new( self )        
+        @runner ||= Darkstar::Server::Deploy::Runner.new( self )        
       end
       
       def deploy!

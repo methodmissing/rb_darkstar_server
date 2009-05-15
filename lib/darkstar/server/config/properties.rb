@@ -10,14 +10,18 @@ module Darkstar
              com.sun.sgs.app.listener=#{application_name} ]
         end
    
+        def prefix
+          "META-INF"
+        end
+   
         def filename
-          "#{application_name}.properties"
+          "app.properties"
         end   
         
         private 
         
           def root
-            File.join( base_dir, 'data', application_name )
+            File.join( application_tmp_path, 'data', application_name )
           end
         
       end

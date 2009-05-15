@@ -20,7 +20,7 @@ module Darkstar
         private
         
           def run( variation = 'boot' )
-            puts cmd( variation )
+            puts "'#{cmd( variation )}'"
             puts %x[#{cmd( variation )}]
           end
         

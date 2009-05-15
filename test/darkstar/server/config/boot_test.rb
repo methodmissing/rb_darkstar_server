@@ -9,7 +9,7 @@ class ConfigBootTest < Test::Unit::TestCase
   end  
   
   test "should have a string representation" do
-    assert_equal " SGS_DEPLOY=/tmp/rb_darkstar_server_test\n             SGS_PROPERTIES=/tmp/rb_darkstar_server_test/conf/Test.properties\n             SGS_LOGGING=/tmp/rb_darkstar_server_test/conf/logging.properties ", @config.to_s
+    assert_equal " SGS_DEPLOY=/tmp/Test\n             SGS_PROPERTIES=/tmp/Test/conf/Test.properties\n             SGS_LOGGING=/tmp/Test/conf/logging.properties ", @config.to_s
   end
   
 end

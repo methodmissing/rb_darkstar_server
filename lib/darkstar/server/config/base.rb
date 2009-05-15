@@ -19,6 +19,10 @@ module Darkstar
           raise NotImplemented
         end
         
+        def prefix
+          "conf"
+        end
+        
         def filename
           raise NotImplemented
         end
@@ -36,7 +40,7 @@ module Darkstar
         
           def ensure_directory( path )
             @directory = path if path
-            FileUtils.makedirs directory
+            FileUtils.makedirs File.join( directory, prefix )
             yield
           end
           
@@ -45,11 +49,11 @@ module Darkstar
           end
           
           def directory
-            @directory || File.join( application_path, 'conf' )
+            @directory || File.join( application_tmp_path, prefix )
           end
         
           def base_dir
-            "#{application_path}"
+            application_tmp_path
           end
         
       end

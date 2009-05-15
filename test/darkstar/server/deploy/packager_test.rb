@@ -20,17 +20,13 @@ class DeployPackagerTest < Test::Unit::TestCase
     assert_equal '/tmp/Test/lib', @packager.lib     
   end
 
-  test "should be able to calculate it's config path" do
-    assert_equal '/tmp/Test/conf', @packager.config     
-  end
-
   test "should be able to yield it's listener path" do
     assert_equal '/tmp/Test/lib/Test.rb', @packager.listener   
   end
   
   test "should be able to setup a sandboxed package environment" do
     @packager.sandbox do
-      assert_equal 7, Dir.entries( @packager.path ).size 
+      assert_equal 6, Dir.entries( @packager.path ).size 
     end
   end
   
@@ -52,8 +48,6 @@ class DeployPackagerTest < Test::Unit::TestCase
   test "should be able to write it's configuration to disk" do
     @packager.sandbox do
       @packager.configure!
-      puts Dir.entries( @packager.config ).inspect
-      assert_equal 2, Dir.entries( @packager.config ).grep(/properties/).size
       assert_equal "/tmp/Test/conf/Test.boot", @packager.boot_with
     end
   end

@@ -28,10 +28,6 @@ module Darkstar
           @lib ||= File.join( path, 'lib' )
         end
         
-        def config
-          @config ||= File.join( path, 'conf' )
-        end
-        
         def listener
           @listener ||= File.join( lib, "#{application_name}.rb" )
         end
@@ -48,8 +44,8 @@ module Darkstar
           end 
         end
         
-        def configure!         
-          @boot_with = @application.configuration.configure!( config )
+        def configure!
+          @boot_with = @application.configuration.configure! #( path )
         end
         
         def compile!
@@ -64,11 +60,16 @@ module Darkstar
           @jar ||= "/tmp/#{application_name}.jar"
         end
         
+        def deploy_jar!
+          FileUtils.cp jar, DEPLOY
+        end
+        
         def package!
           sandbox do
             configure!
             compile!
             jar!
+            deploy_jar!
           end
         end
         
