@@ -1,2 +1,4 @@
 .DS_Store
 vendor/tutorial/*
+vendor/data/*
+vendor/deploy/*

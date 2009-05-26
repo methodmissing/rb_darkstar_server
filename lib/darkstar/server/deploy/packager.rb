@@ -49,11 +49,12 @@ module Darkstar
         end
         
         def compile!
-          %x[jrubyc -d #{path} #{lib}]
+          %x[jrubyc -d #{path} -t #{path} #{lib}]
         end
         
         def jar!
           %x[jar -cvf #{jar} -C #{path} .]
+          FileUtils.cp File.join( lib, 'hello_world.class' ), File.join( path, 'HelloWorld.class' ) if File.exist?( File.join( path, 'HelloWorld.class' ) ) 
         end
         
         def jar
